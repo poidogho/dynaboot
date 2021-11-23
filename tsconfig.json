@@ -10,11 +10,11 @@
        "emitDecoratorMetadata": true,
        "noUnusedLocals": true,
        "noUnusedParameters": true,
-       "outDir": "dist/api/src",
+       "outDir": "dist",
        "baseUrl": "."
    },
    "include": [
-       "src/**/*.ts",
+       "./**/*.ts",
        "node_modules/@types"
    ],
    "exclude": [
