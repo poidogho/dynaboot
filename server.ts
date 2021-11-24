@@ -1,10 +1,15 @@
 require('dotenv').config();
 require('./src/models/expense');
-
+import morgan from 'morgan';
 import mongoose from 'mongoose';
 import express from 'express';
 import cors from 'cors';
 import { config } from './src/config/config';
+import { routes } from './src/routes';
+
+let server = express();
+
+routes.forEach((route) => route.initialize(server));
 
 const options = {
   useUnifiedTopology: true,
@@ -14,7 +19,6 @@ const options = {
 };
 
 const initializeServer = () => {
-  let server = express();
   server.use(express.json({ limit: '50mb' }));
   server.use(
     express.urlencoded({
@@ -24,6 +28,7 @@ const initializeServer = () => {
     })
   );
   server.use(cors());
+  server.use(morgan('dev'));
   return server;
 };
 
@@ -36,6 +41,10 @@ const connectToDB = async () => {
 const start = async () => {
   const server = initializeServer();
   await connectToDB();
+
+  server.get('/healthz', (_, res) => {
+    res.sendStatus(200);
+  });
   const startUpMessage = `Server is up and listening on ${config.port}`;
 
   server.listen(config.port, () => console.log(startUpMessage));
