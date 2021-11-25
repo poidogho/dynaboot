@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-// import { IExpense } from '../typings';
 import { Expense } from '../domain-models.ts/types';
 
 export class ExpenseDao {

@@ -8,6 +8,7 @@ import { config } from './src/config/config';
 import { routes } from './src/routes';
 
 let server = express();
+console.log(routes);
 
 routes.forEach((route) => route.initialize(server));
 
