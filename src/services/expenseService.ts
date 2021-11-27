@@ -1,4 +1,4 @@
-import { IExpense, IExpenseService, IExpenseDao } from '../typings';
+import { IExpenseService, IExpenseDao } from '../typings';
 import { Expense } from '../domain-models.ts/types';
 
 export class ExpenseService implements IExpenseService {

@@ -26,13 +26,13 @@ export class ExpenseDao {
 
   async updateExpense(expense: Expense): Promise<Expense> {
     try {
-      if (!expense.id) {
+      if (!expense._id) {
         throw new Error(
           'Expense Id is required to update a particular expense'
         );
       }
       return await this.expense.findByIdAndUpdate(
-        { _id: expense.id },
+        { _id: expense._id },
         expense,
         { new: true }
       );

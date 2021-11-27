@@ -1,7 +1,8 @@
-import { IExpenseService } from '../typings';
-import express, { Request, Response } from 'express';
+import { IExpenseService, StatusCodes } from '../typings';
+import { Request, Response } from 'express';
 
 export class ExpenseRoutes {
+  public static TAX = 15;
   expenseService: IExpenseService;
   router: any;
   constructor(expenseService: IExpenseService, router: any) {
@@ -10,11 +11,17 @@ export class ExpenseRoutes {
   }
 
   initialize(server: any): void {
-    this.router.post('/expensies/', (req: Request, res: Response) =>
+    this.router.post('/expenses/', (req: Request, res: Response) =>
       this.createExpense(req, res)
     );
-    this.router.get('/expensies/', (req: Request, res: Response) =>
+    this.router.get('/expenses/', (req: Request, res: Response) =>
       this.getExpensies(req, res)
+    );
+    this.router.patch('/expenses/:expenseId', (req: Request, res: Response) =>
+      this.updateExpense(req, res)
+    );
+    this.router.delete('/expenses/:expenseId', (req: Request, res: Response) =>
+      this.deleteExpense(req, res)
     );
     server.use('/api', this.router);
   }
@@ -23,31 +30,57 @@ export class ExpenseRoutes {
     try {
       const { body } = req;
       const newExpense = await this.expenseService.createExpense(body);
-      res.send({
-        expense: newExpense,
-        status: 200
+      res.status(201).send({
+        expense: newExpense
       });
     } catch (err) {
-      res.status(500);
+      res
+        .status(500)
+        .send({ message: `SOMETHING WENT WRONG - UNABLE TO CREATE EXPENSE` });
     }
   }
 
   async getExpensies(req: Request, res: Response) {
     try {
       const expensies = await this.expenseService.getExpencies();
-      res.send({
+      res.status(200).send({
         expensies,
-        status: 200
+        tax: ExpenseRoutes.TAX
       });
     } catch (err) {
-      res.send(500).json({
-        err
-      });
+      res.status(500);
+      throw err;
     }
   }
 
   async updateExpense(req: Request, res: Response) {
     try {
-    } catch (err) {}
+      const { body } = req;
+      const updatedExpense = await this.expenseService.updateExpense(body);
+      res.status(200).send({
+        expense: updatedExpense,
+        message: `succesfully updated expense with id ${updatedExpense._id}`
+      });
+    } catch (err) {
+      res.status(500).send({
+        message: `SOMETHING WENT WRONG - UNABLE TO UPDATE EXPENSE`
+      });
+    }
+  }
+
+  async deleteExpense(req: Request, res: Response) {
+    try {
+      const { expenseId } = req.params;
+      const deletedExpense = await this.expenseService.deleteExpense(expenseId);
+      res.status(200).json({
+        expense: deletedExpense,
+        message: 'succesfully deleted expense'
+      });
+    } catch (err) {
+      res.status(500).send({
+        message: `SOMETHING WENT WRONG - UNABLE TO DELETE EXPENSE`
+      });
+      throw err;
+    }
   }
 }

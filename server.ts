@@ -8,16 +8,13 @@ import { config } from './src/config/config';
 import { routes } from './src/routes';
 
 let server = express();
-console.log(routes);
 
-routes.forEach((route) => route.initialize(server));
-
-const options = {
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: true
-};
+// const options = {
+//   useUnifiedTopology: true,
+//   useNewUrlParser: true,
+//   useCreateIndex: true,
+//   useFindAndModify: true
+// };
 
 const initializeServer = () => {
   server.use(express.json({ limit: '50mb' }));
@@ -35,13 +32,15 @@ const initializeServer = () => {
 
 const connectToDB = async () => {
   console.log(config.dbConnectionString);
-  await mongoose.connect(`${config.dbConnectionString}?${options}`);
+  await mongoose.connect(config.dbConnectionString);
   console.log('connected to db');
 };
 
 const start = async () => {
   const server = initializeServer();
   await connectToDB();
+
+  routes.forEach((route) => route.initialize(server));
 
   server.get('/healthz', (_, res) => {
     res.sendStatus(200);
