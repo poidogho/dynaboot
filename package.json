@@ -9,6 +9,7 @@
     "test-coverage": "export NODE_ENV=test jest --verbose --no-cache --coverage",
     "start:build": "tsc -w",
     "start:run": "nodemon dist/server.js",
+    "start:prod": "node dist/server.js",
     "start": "concurrently npm:start:*"
   },
   "repository": {
