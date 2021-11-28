@@ -1,7 +1,7 @@
 import express from 'express';
 import { ExpenseRoutes } from './expense-routes';
 import { ExpenseDao } from '../dao/expense-dao';
-import { ExpenseService } from '../services/expenseService';
+import { ExpenseService } from '../services/expense-service';
 
 const router = express.Router();
 

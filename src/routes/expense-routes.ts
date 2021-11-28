@@ -59,6 +59,8 @@ export class ExpenseRoutes {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   async getExpensies(req: Request, res: Response) {
     try {
       const expensies = await this.expenseService.getExpencies();

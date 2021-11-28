@@ -28,7 +28,6 @@ const initializeServer = () => {
 };
 
 const connectToDB = async () => {
-  console.log(config.dbConnectionString);
   await mongoose.connect(config.dbConnectionString);
   console.log('connected to db');
 };
