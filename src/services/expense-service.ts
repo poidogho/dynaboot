@@ -12,6 +12,7 @@ export class ExpenseService implements IExpenseService {
       const newExpense = await this.expenseDao.createExpense(expense);
       return newExpense;
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }
@@ -21,6 +22,7 @@ export class ExpenseService implements IExpenseService {
       const expencies = await this.expenseDao.getExpencies();
       return expencies;
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }
@@ -30,6 +32,7 @@ export class ExpenseService implements IExpenseService {
       const updatedExpense = await this.expenseDao.updateExpense(expense);
       return updatedExpense;
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }
@@ -39,6 +42,7 @@ export class ExpenseService implements IExpenseService {
       const deletedExpense = await this.expenseDao.deleteExpense(expenseId);
       return deletedExpense;
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }

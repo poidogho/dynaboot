@@ -4,8 +4,8 @@
   "description": "Express server",
   "main": "server.ts",
   "scripts": {
-    "lint": "tslint -c tslint.json -p tsconfig.json",
-    "test": "export NODE_ENV=test && jest --verbose --no-cache",
+    "lint": "eslint --ext .ts src",
+    "test": "export NODE_ENV=test && npm run lint && jest --verbose --no-cache",
     "test-coverage": "export NODE_ENV=test jest --verbose --no-cache --coverage",
     "start:build": "tsc -w",
     "start:run": "nodemon dist/server.js",
@@ -30,8 +30,10 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-validator": "^6.13.0",
     "mongoose": "^6.0.13",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "ts-jest": "^27.0.7"
   },
   "devDependencies": {
     "@types/bson": "^4.2.0",
@@ -40,8 +42,10 @@
     "@types/jest": "^27.0.3",
     "@types/sinon": "^10.0.6",
     "@types/sinon-chai": "^3.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
+    "eslint-plugin-unicorn": "^39.0.0",
     "jest": "^27.3.1",
     "sinon": "^12.0.1",
     "sinon-chai": "^3.7.0",

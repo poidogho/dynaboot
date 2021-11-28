@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('./src/models/expense');
 import morgan from 'morgan';
 import mongoose from 'mongoose';
@@ -7,14 +11,7 @@ import cors from 'cors';
 import { config } from './src/config/config';
 import { routes } from './src/routes';
 
-let server = express();
-
-// const options = {
-//   useUnifiedTopology: true,
-//   useNewUrlParser: true,
-//   useCreateIndex: true,
-//   useFindAndModify: true
-// };
+const server = express();
 
 const initializeServer = () => {
   server.use(express.json({ limit: '50mb' }));
@@ -37,17 +34,17 @@ const connectToDB = async () => {
 };
 
 const start = async () => {
-  const server = initializeServer();
+  const app = initializeServer();
   await connectToDB();
 
   routes.forEach((route) => route.initialize(server));
 
-  server.get('/healthz', (_, res) => {
+  app.get('/healthz', (_, res) => {
     res.sendStatus(200);
   });
   const startUpMessage = `Server is up and listening on ${config.port}`;
 
-  server.listen(config.port, () => console.log(startUpMessage));
+  app.listen(config.port, () => console.log(startUpMessage));
 };
 
 start().catch((err) => {

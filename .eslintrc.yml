@@ -1,0 +1,185 @@
+root: true
+
+parser: '@typescript-eslint/parser'
+
+env:
+    es2020: true
+    node: true
+
+extends:
+    - eslint:recommended
+    - plugin:@typescript-eslint/recommended
+
+plugins:
+    - '@typescript-eslint'
+    - 'unicorn'
+
+rules:
+    spaced-comment:
+        - error
+
+    curly:
+        - error
+
+    eol-last:
+        - error
+
+    guard-for-in:
+        - error
+
+    no-bitwise:
+        - error
+
+    no-debugger:
+        - error
+
+    no-eval:
+        - error
+
+    no-var:
+        - error
+
+    padded-blocks:
+        - error
+        - never
+
+    space-in-parens:
+        - error
+
+    no-tabs:
+        - error
+
+    no-multiple-empty-lines:
+        - error
+
+    no-trailing-spaces:
+        - error
+
+    computed-property-spacing:
+        - error
+
+    no-multi-spaces:
+        - error
+
+    array-bracket-spacing:
+        - error
+
+    block-spacing:
+        - error
+
+    eqeqeq:
+        - error
+
+    no-return-await:
+        - error
+
+    # plugin rules
+
+    unicorn/filename-case:
+        - error
+
+    # disable typescript-eslint conflicting rules
+
+    no-unused-expressions:
+        - off
+
+    quotes:
+        - off
+
+    semi:
+        - off
+
+    no-shadow:
+        - off
+
+    object-curly-spacing:
+        - off
+
+    brace-style:
+        - off
+
+    func-call-spacing:
+        - off
+
+    comma-dangle:
+        - off
+
+    no-unused-vars:
+        - off
+
+    # typescript-eslint rules
+
+    '@typescript-eslint/no-unused-expressions':
+        - error
+
+    '@typescript-eslint/quotes':
+        - error
+        - single
+        - avoidEscape: true
+          allowTemplateLiterals: true
+
+    '@typescript-eslint/object-curly-spacing':
+        - error
+        - always
+
+    '@typescript-eslint/brace-style':
+        - error
+
+    '@typescript-eslint/func-call-spacing':
+        - error
+
+    '@typescript-eslint/comma-dangle':
+        - error
+        - never
+
+    '@typescript-eslint/naming-convention':
+        - error
+        - selector: ['classProperty']
+          format: ['camelCase', 'UPPER_CASE']
+        - selector: ['class']
+          format: ['PascalCase']
+
+    '@typescript-eslint/no-shadow':
+        - error
+
+    '@typescript-eslint/semi':
+        - error
+
+    '@typescript-eslint/consistent-type-assertions':
+        - error
+
+    '@typescript-eslint/prefer-namespace-keyword':
+        - error
+
+    '@typescript-eslint/no-require-imports':
+        - error
+
+    '@typescript-eslint/no-var-requires':
+        - error
+
+    '@typescript-eslint/type-annotation-spacing':
+        - error
+
+    '@typescript-eslint/no-unused-vars':
+        - error
+        - argsIgnorePattern: '^_'
+
+    '@typescript-eslint/ban-types':
+        - error
+
+    # Disable recommended settings that we do not adhere to
+
+    no-control-regex: # user.ts
+        - off
+
+    no-useless-escape:
+        - off
+
+    '@typescript-eslint/no-explicit-any':
+        - off
+
+    '@typescript-eslint/no-namespace':
+        - off
+
+    '@typescript-eslint/no-empty-interface':
+        - off

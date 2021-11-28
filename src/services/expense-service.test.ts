@@ -5,8 +5,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import * as Typemoq from 'typemoq';
 import { ExpenseDao } from '../dao/expense-dao';
-import { ExpenseService } from '../services/expenseService';
-var mongoose = require('mongoose');
+import { ExpenseService } from './expense-service';
 
 chai.use(sinonChai);
 chai.use(chaiAsPromised);
@@ -15,7 +14,7 @@ describe(ExpenseService.name, () => {
   let expenseDao: Typemoq.IMock<ExpenseDao>;
   let expenseService: ExpenseService;
 
-  const mockObjectId = mongoose.Types.ObjectId();
+  const mockObjectId = '56cb91bdc3464f14678934ca';
 
   beforeAll(() => {
     expenseDao = Typemoq.Mock.ofType<ExpenseDao>();

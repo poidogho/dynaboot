@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-export let ExpenseSchema: Schema = new Schema(
+export const ExpenseSchema: Schema = new Schema(
   {
     amount: {
       type: Number,

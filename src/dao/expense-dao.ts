@@ -12,6 +12,7 @@ export class ExpenseDao {
       const newExpense = new this.expense(expense);
       return newExpense.save();
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }
@@ -20,6 +21,7 @@ export class ExpenseDao {
     try {
       return await this.expense.find();
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }
@@ -37,6 +39,7 @@ export class ExpenseDao {
         { new: true }
       );
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }
@@ -48,6 +51,7 @@ export class ExpenseDao {
       }
       return this.expense.findByIdAndDelete({ _id: expenseId });
     } catch (err) {
+      console.error(err);
       throw err;
     }
   }
