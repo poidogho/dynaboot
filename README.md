@@ -32,6 +32,14 @@ npm install
 # Run Locally
 npm run start:build && npm run start:run
 
+# Run in Docker
+docker build -t dynaboot:1.0.0 .
+
+#Get docker image from list of images
+docker images
+
+#Run docker image
+docker run -it -p 8080:8080 <imageId>
 ```
 
 ## Testing
